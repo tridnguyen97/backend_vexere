@@ -21,7 +21,7 @@ app.use("/images", express.static("uploads"))
 
 app.use("/api", require("./routes/api"));
 
-const port = 5000;
+const port = process.env.PORT || config.port;
 app.listen(port, () => {
   console.log(`App is running on port ${port}`)
 })
