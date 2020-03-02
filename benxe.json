@@ -1,0 +1,3 @@
+{"_id":{"$oid":"5e4a9d09c6d2b1017059ed9a"},"name":"Ben xe Mien Tay","address":"Kinh Duong Vuong, quan Binh Tan","province":"TP.HCM","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e4bc9c2a677cf1900f2f1b1"},"name":"Ben xe Mien Dong","address":"Đinh Bộ Lĩnh, quan Bình Thạnh","province":"TP.HCM","__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5e4bcd50a677cf1900f2f1b2"},"name":"Ben xe Chợ Lớn","address":"Lê Quang Sung, quan 6","province":"TP.HCM","__v":{"$numberInt":"0"}}
