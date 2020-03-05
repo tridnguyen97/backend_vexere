@@ -1,0 +1,5 @@
+Vexere
+    +SSO :expressjs // Vi nho nhe, support manh
+    +main task: Loopback 4 // De maintain, phat trien
+    +blog: Loopback 3
+    +chat: socket IO
