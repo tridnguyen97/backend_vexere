@@ -11,7 +11,7 @@ module.exports.uploadImage = (type) => {
     }
   })
 
-  const upload = multer({ storage: storage });
+  const upload = multer({ 2: storage });
 
   return upload.single(type);
 }
