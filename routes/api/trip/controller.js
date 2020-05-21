@@ -1,4 +1,5 @@
 const { Trip } = require("../../../models/Trip");
+const {Station} = require("../../../models/Station")
 const { Seat } = require("../../../models/Seat");
 const seatCodes = [
   "A01", "A02", "A03", "A04", "A05", "A06", "A07", "A08", "A09", "A010", "A11", "A12",
@@ -16,6 +17,37 @@ module.exports.getTrips = (req, res, next) => {
 
 module.exports.getTripById = (req, res, next) => {
 
+}
+
+module.exports.getTripByQuery = (req,res,next) => {
+  const fromStationName = req.query.fromStation;
+  const toStationName = req.query.toStation;
+  let fromStationId;
+  let toStationId;
+  console.log(fromStationName)
+  console.log(toStationName)
+  Station.findOne({name:fromStationName})
+    .then(station => {
+      if(!station) return Promise.reject({message: "departure is not found"})
+      fromStationId = station._id
+      return Station.findOne({name:toStationName})
+    })
+    .then(station => {
+      if(!station) return Promise.reject({message: "arrival is not found"})
+      toStationId = station._id
+      console.log("Id of arrival",toStationId)
+      console.log("id of departure",fromStationId)
+      return Trip.find({"toStationId":toStationId,"fromStationId":fromStationId})
+              .populate("fromStationId")
+              .populate("toStationId")
+    })
+    
+    .then(trips => {
+      console.log(trips)
+      if(!trips) return Promise.reject({message: "trip is not found"})
+      res.status(200).json(trips)
+    })
+    .catch(err => res.json(err))
 }
 
 module.exports.createTrip = (req, res, next) => {
@@ -40,9 +72,15 @@ module.exports.replaceTripById = (req, res, next) => {
 }
 
 module.exports.updateTripById = (req, res, next) => {
-
+  const {id} = req.params;
+  Trip.updateOne({_id : id})
+    .then(() => res.status(200).json({message: "Update successfully"}))
+    .catch(err => res.json(err))
 }
 
-module.exports.deleteById = (req, res, next) => {
-
-}
+module.exports.deleteTripById = (req, res, next) => {
+  const {id} = req.params;
+  Trip.deleteOne({_id : id})
+    .then(() => res.status(200).json({ message: "Delete successfully" }))
+    .catch(err => res.json(err))
+  }

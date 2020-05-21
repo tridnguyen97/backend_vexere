@@ -5,9 +5,10 @@ const router = express.Router();
 
 router.get("/", tripController.getTrips)
 // router.get("/:id", tripController.getTripById)
+ router.get("/find",tripController.getTripByQuery)
 router.post("/", tripController.createTrip)
 // router.put("/:id", tripController.replaceTripById)
-// router.patch("/:id", tripController.updateTripById)
-// router.delete("/:id", tripController.deleteTripById)
+router.patch("/:id", tripController.updateTripById)
+router.delete("/:id", tripController.deleteTripById)
 
 module.exports = router;

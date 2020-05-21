@@ -4,6 +4,15 @@ const { Trip } = require("../../../models/Trip")
 const { Seat } = require("../../../models/Seat");
 const { sendBookTicketEmail } = require("../../../email/bookingTicket")
 
+module.exports.getTickets = (req,res,next) => {
+  Ticket.find()
+    .then(tickets => {
+      res.status(200).json(tickets)
+    })
+    .catch(err => res.json(err))
+}
+
+
 // create ticket = book ticket
 module.exports.createTicket = (req, res, next) => {
   const { tripId, seatCodes } = req.body;
